@@ -11,6 +11,8 @@ namespace DataAccess.Concrete.EntityFramework
     public class RentACarDbContext:DbContext
     {
         public DbSet<Car> Cars { get; set; }
+        public DbSet<Brand> Brands { get; set; }
+        public DbSet<Color> Colors { get; set; }
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             optionsBuilder.UseSqlServer("Data Source=.;Initial Catalog=RentACarDb;TrustServerCertificate=True;User ID=sa;Password=1453;");

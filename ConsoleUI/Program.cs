@@ -8,9 +8,9 @@ CarManager carManager = new CarManager(new EfCarDal());
 
 
 
-foreach (var item in carManager.GetAll())
+foreach (var item in carManager.GetCarDetailDTOs())
 {
-    Console.WriteLine(item.Description);
+    Console.WriteLine(item.CarName + " / " + item.ColorName + " / " + item.BrandName + " / " + item.DailyPrice);
 }
 
 Console.WriteLine("/////////////////////////////////////////");
