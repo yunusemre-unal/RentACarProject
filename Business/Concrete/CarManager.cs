@@ -1,4 +1,6 @@
 ﻿using Business.Abstract;
+using Business.Constants;
+using Core.Utilities;
 using DataAccess.Abstract;
 using Entities.Concrete;
 using Entities.DTOs;
@@ -15,29 +17,73 @@ namespace Business.Concrete
         ICarDal _carDal;
         public CarManager(ICarDal carDal)
         {
-             _carDal = carDal;
+            _carDal = carDal;
         }
 
-        public List<Car> GetAll()
+        public IResult Add(Car car)
         {
-            return _carDal.GetAll();
+            if (car.Description.Length < 2)
+            {
+                return new ErrorResult(Messages.CarNameInvalid);
+            }
+            return new SuccessResult(Messages.CarAdded);
         }
 
-        public List<Car> GetAllByBrandId(int brandId)
+        public IResult Delete(Car car)
         {
-            return _carDal.GetAll(p=>p.BrandId==brandId);
+            return new SuccessResult();
+        }
+
+        public IDataResult<List<Car>> GetAll()
+        {
+            if (DateTime.Now.Hour==16)
+            {
+                return new ErrorDataResult<List<Car>>(Messages.MaintenanceTime);
+            }
+            return new SuccessDataResult<List<Car>>(_carDal.GetAll(), Messages.CarListed);
+        }
+
+        public IDataResult<List<Car>> GetAllByBrandId(int brandId)
+        {
+            if (DateTime.Now.Hour == 16)
+            {
+                return new ErrorDataResult<List<Car>>(Messages.MaintenanceTime);
+            }
+            return new SuccessDataResult<List<Car>>(_carDal.GetAll(p => p.BrandId == brandId), Messages.CarListed);
 
         }
 
-        public List<Car> GetAllByColorId(int colorId)
+        public IDataResult<List<Car>> GetAllByColorId(int colorId)
         {
-            return _carDal.GetAll(p=>p.ColorId==colorId);
+            if (DateTime.Now.Hour == 16)
+            {
+                return new ErrorDataResult<List<Car>>(Messages.MaintenanceTime);
+            }
+            return new SuccessDataResult<List<Car>>(_carDal.GetAll(p => p.ColorId == colorId), Messages.CarListed);
 
         }
 
-        public List<CarDetailDTO> GetCarDetailDTOs()
+        public IDataResult<Car> GetById(int id)
         {
-            return _carDal.GetCarDetailDTOs();
+            if (DateTime.Now.Hour == 16)
+            {
+                return new ErrorDataResult<Car>(Messages.MaintenanceTime);
+            }
+            return new SuccessDataResult<Car>(_carDal.Get(x => x.CarId == id));
+        }
+
+        public IDataResult<List<CarDetailDTO>> GetCarDetailDTOs()
+        {
+            if (DateTime.Now.Hour == 16)
+            {
+                return new ErrorDataResult<List<CarDetailDTO>>(Messages.MaintenanceTime);
+            }
+            return new SuccessDataResult<List<CarDetailDTO>>(_carDal.GetCarDetailDTOs());
+        }
+
+        public IResult Update(Car car)
+        {
+            return new SuccessResult();
         }
     }
 }

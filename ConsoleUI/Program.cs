@@ -7,25 +7,11 @@ CarManager carManager = new CarManager(new EfCarDal());
 
 
 
-
-foreach (var item in carManager.GetCarDetailDTOs())
-{
-    Console.WriteLine(item.CarName + " / " + item.ColorName + " / " + item.BrandName + " / " + item.DailyPrice);
-}
-
-Console.WriteLine("/////////////////////////////////////////");
-
-foreach (var item in carManager.GetAllByBrandId(2))
-{
-    Console.WriteLine(item.Description);
-}
-
-Console.WriteLine("/////////////////////////////////////////");
-
-foreach (var item in carManager.GetAllByColorId(1))
-{
-    Console.WriteLine(item.Description);
-}
-
-Console.WriteLine("/////////////////////////////////////////");
+RentalManager rentalManager = new RentalManager(new EfRentalDal());
+Rental rental=new Rental();
+rental.CarId = 1;
+rental.CustomerId = 1;
+rental.RentDate=DateTime.Now;
+var result= rentalManager.Add(rental);
+Console.WriteLine(result.Message);
 
