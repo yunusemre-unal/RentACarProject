@@ -14,5 +14,7 @@ namespace Business.Constants
         public static string MaintenanceTime = "Bakım zamanı";
         public static string CarRented = "Araç başarıyla kiralandı";
         public static string CarIsAlreadyRented = "Araç zaten kiralık durumda";
+        public static string CarImageLimitReached = "Araç resim sınırına ulaşıldı";
+        public static string ImageNotFound = "Araca ait resim bulunamadı";
     }
 }
