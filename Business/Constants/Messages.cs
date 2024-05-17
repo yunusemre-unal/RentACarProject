@@ -16,5 +16,12 @@ namespace Business.Constants
         public static string CarIsAlreadyRented = "Araç zaten kiralık durumda";
         public static string CarImageLimitReached = "Araç resim sınırına ulaşıldı";
         public static string ImageNotFound = "Araca ait resim bulunamadı";
+        public static string AuthorizationDenied = "Erişim reddedildi";
+        public static string UserRegistered = "kullanıcı oluşturuldu";
+        public static string UserNotFound = "kullanııc bulunamadı";
+        public static string PasswordError = "şifre hatalı";
+        public static string SuccessfulLogin = "başarılı giriş";
+        public static string UserAlreadyExists = "kullanıcı zaten var";
+        public static string AccessTokenCreated = "token oluşuturuldu";
     }
 }
